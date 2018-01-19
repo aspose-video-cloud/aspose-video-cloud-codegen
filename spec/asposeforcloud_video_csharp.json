@@ -1,0 +1,1891 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Aspose.Video for Cloud API References",
+    "version": "1.1"
+  },
+  "host": "localhost",
+  "basePath": "/v1.1",
+  "schemes": [],
+  "consumes": [
+    "application/xml",
+    "application/json"
+  ],
+  "produces": [
+    "application/xml",
+    "application/json"
+  ],
+  "paths": {
+    "/video/{name}/videoProperties": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Read video properties info.",
+        "operationId": "GetVideoProperties",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The video's name."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "as propertes info.",
+            "schema": {
+              "$ref": "#/definitions/VideoPropertiesResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "IVideoFileRequest"
+      }
+    },
+    "/video/{name}/videoProperties/{propertyName}": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Read video property info by the property name.",
+        "operationId": "GetVideoProperty",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The video name."
+          },
+          {
+            "type": "string",
+            "name": "PropertyName",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The property name."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "as the property info.",
+            "schema": {
+              "$ref": "#/definitions/VideoPropertyResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "IVideoFileRequest"
+      }
+    },
+    "/video/{name}/appendVideo": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Append video to original video.",
+        "operationId": "PostAppendVideo",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Path where to save the result file."
+          },
+          {
+            "name": "AppendOptions",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppendOptions"
+            },
+            "x-nullable": true,
+            "description": "Append options.\n            "
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with updated video data.\n           ",
+            "schema": {
+              "$ref": "#/definitions/VideoResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest"
+      }
+    },
+    "/video/{name}": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Export the document into the specified format.",
+        "operationId": "GetVideoWithFormat",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": true,
+            "description": "The file name."
+          },
+          {
+            "type": "string",
+            "name": "Format",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The destination format."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "ResultPath",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Path to save result"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stream with the document exported to the specified format if format specified, otherwise the document common info.",
+            "schema": {
+              "type": "file",
+              "description": "File with result of operation"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "IVideoFileRequest, ICanSpecifyOutputFormatRequest",
+        "x-binary-result": "true"
+      }
+    },
+    "/video/{name}/convert": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Convert document from request content to format specified.",
+        "operationId": "PostConvertVideo",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original file name."
+          },
+          {
+            "type": "string",
+            "name": "Format",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Destination format"
+          },
+          {
+            "type": "string",
+            "name": "ResultPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Path for saving operation result to the local storage."
+          },
+          {
+            "name": "Options",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConvertOptions"
+            },
+            "x-nullable": true,
+            "description": "Conversion options"
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with conversion result.",
+            "schema": {
+              "type": "file",
+              "description": "File with result of operation",
+              "$ref": "#/definitions/SaveResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest, ICanSpecifyOutputFormatRequest",
+        "x-binary-result": "true"
+      }
+    },
+    "/video/{name}/extractThumbnail": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Create a thumbnail image.",
+        "operationId": "PostExtractThumbnail",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "result image path"
+          },
+          {
+            "type": "integer",
+            "name": "Offset",
+            "in": "query",
+            "required": true,
+            "x-nullable": false,
+            "description": "Determines from which time position the frame for the thumbnail should be taken.",
+            "format": "int64"
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with the generated files data.",
+            "schema": {
+              "$ref": "#/definitions/ExtractThumbnailResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest"
+      }
+    },
+    "/video/{name}/extract": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Extract video.",
+        "operationId": "PostExtractVideo",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "result video path"
+          },
+          {
+            "type": "integer",
+            "name": "Start",
+            "in": "query",
+            "required": true,
+            "x-nullable": false,
+            "description": "Time position from which start extraction.",
+            "format": "int64"
+          },
+          {
+            "type": "integer",
+            "name": "Offset",
+            "in": "query",
+            "required": true,
+            "x-nullable": false,
+            "description": "How long the extracted part will be - how much seconds should be extracted from the start position.",
+            "format": "int64"
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          },
+          {
+            "type": "string",
+            "name": "FontsLocation",
+            "in": "query",
+            "description": "Folder in filestorage with custom fonts."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with the generated files data.",
+            "schema": {
+              "$ref": "#/definitions/ExtractVideoResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest, ICanUseCustomFontsRequest"
+      }
+    },
+    "/video/{fileName}": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Read video common info.",
+        "operationId": "GetVideo",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "FileName",
+            "in": "path",
+            "required": true,
+            "x-nullable": true,
+            "description": "The file name."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Video common info.",
+            "schema": {
+              "$ref": "#/definitions/VideoResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/video/loadWebVideo": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Loads new video from web into the file with any supported format of data.",
+        "operationId": "PostLoadWebVideo",
+        "parameters": [
+          {
+            "name": "Data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadWebVideoData"
+            },
+            "x-nullable": true,
+            "description": "Parameters of loading."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with the saved video info.",
+            "schema": {
+              "$ref": "#/definitions/SaveResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VideoPropertiesResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "VideoProperties": {
+              "$ref": "#/definitions/VideoProperties"
+            }
+          }
+        }
+      ]
+    },
+    "VideoProperties": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkElement"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "List": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VideoProperty"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "VideoProperty": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "Duration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkElement"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "video": {
+              "description": "Represents video properties",
+              "$ref": "#/definitions/VideoOptions"
+            },
+            "audio": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudioOptions"
+              },
+              "description": "Class represents audio metadata"
+            },
+            "Path": {
+              "type": "string",
+              "description": "Original video file path"
+            },
+            "Duration": {
+              "type": "integer",
+              "description": "Original video data duration",
+              "format": "int64"
+            }
+          }
+        }
+      ],
+      "description": "Video video property DTO."
+    },
+    "VideoOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Bitrate",
+        "FPS"
+      ],
+      "properties": {
+        "Format": {
+          "type": "string",
+          "description": "Represents original video format"
+        },
+        "ColorModel": {
+          "type": "string",
+          "description": "Represents original color model"
+        },
+        "FrameSize": {
+          "type": "string",
+          "description": "Represetns original resolution"
+        },
+        "Bitrate": {
+          "type": "integer",
+          "description": "Represetns original video bitrate",
+          "format": "int32"
+        },
+        "FPS": {
+          "type": "integer",
+          "description": "Represetns original FPS",
+          "format": "int32"
+        }
+      },
+      "description": "Video properties"
+    },
+    "AudioOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Bitrate",
+        "TrackId"
+      ],
+      "properties": {
+        "Format": {
+          "type": "string",
+          "description": "Represents original audio format"
+        },
+        "SampleRate": {
+          "type": "string",
+          "description": "Represents original audio sample rate"
+        },
+        "ChannelOutput": {
+          "type": "string",
+          "description": "Represents original channel output"
+        },
+        "Bitrate": {
+          "type": "integer",
+          "description": "Represents original audio bitrate",
+          "format": "int32"
+        },
+        "TrackId": {
+          "type": "integer",
+          "description": "Represents audio track id number if the original file contains more than one audio track",
+          "format": "int32"
+        }
+      },
+      "description": "Audio properties of the video file"
+    },
+    "LinkElement": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "properties": {
+        "link": {
+          "description": "Link to the video.",
+          "$ref": "#/definitions/VideoApiLink"
+        }
+      },
+      "description": "Reference to video."
+    },
+    "VideoApiLink": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/Link"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Provides information for the Video api resource link."
+    },
+    "Link": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "properties": {
+        "Href": {
+          "type": "string",
+          "description": "The \"href\" attribute contains the link's IRI. atom:link elements MUST\nhave an href attribute, whose value MUST be a IRI reference"
+        },
+        "Rel": {
+          "type": "string",
+          "description": "atom:link elements MAY have a \"rel\" attribute that indicates the link\nrelation type.  If the \"rel\" attribute is not present, the link\nelement MUST be interpreted as if the link relation type is \"alternate\"."
+        },
+        "Type": {
+          "type": "string",
+          "description": "On the link element, the \"type\" attribute's value is an advisory\nmedia type: it is a hint about the type of the representation that is\nexpected to be returned when the value of the href attribute is\ndereferenced.  Note that the type attribute does not override the\nactual media type returned with the representation."
+        },
+        "Title": {
+          "type": "string",
+          "description": "The \"title\" attribute conveys human-readable information about the\nlink.  The content of the \"title\" attribute is Language-Sensitive."
+        }
+      },
+      "description": "Provides information for the object link.\nThis is supposed to be an atom:link, therefore it should have all attributes specified here http://tools.ietf.org/html/rfc4287#section-4.2.7"
+    },
+    "AsposeResponse": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "Code"
+      ],
+      "properties": {
+        "Code": {
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "description": "Response status code."
+        },
+        "Status": {
+          "type": "string",
+          "description": "Response status."
+        }
+      },
+      "description": "Base class for all responses."
+    },
+    "VideoApiErrorResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Message": {
+              "type": "string",
+              "description": "Error message."
+            }
+          }
+        }
+      ],
+      "description": "Response for Api error"
+    },
+    "VideoPropertyResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "VideoProperty": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "AppendOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Codec",
+        "Preset"
+      ],
+      "properties": {
+        "Codec": {
+          "enum": [
+            "Default",
+            "AVC",
+            "H_265",
+            "H_264",
+            "MPEG4",
+            "WMV7",
+            "WMV8",
+            "VP8",
+            "VP9",
+            "XVID"
+          ],
+          "description": "Gets or sets a value determining which  should be used for the resulting video.\nDefault value is ."
+        },
+        "Preset": {
+          "enum": [
+            "Ultrafast",
+            "Superfast",
+            "Veryfast",
+            "Faster",
+            "Fast",
+            "Medium",
+            "Slow",
+            "Slower",
+            "Veryslow",
+            "Placebo"
+          ],
+          "description": "Gets or sets a value determining which  level should be used for the encoding process.\nDefault value is ."
+        },
+        "VideoToAppendPath": {
+          "type": "string",
+          "description": "Gets or sets a value determining which video file should be used for the appending process."
+        }
+      },
+      "description": "container class for append save options"
+    },
+    "VideoResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Video": {
+              "$ref": "#/definitions/Video"
+            }
+          }
+        }
+      ]
+    },
+    "Video": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "description": "A list of links that originate from this Video file."
+        },
+        "FileName": {
+          "type": "string",
+          "description": "Gets the name of the file."
+        },
+        "SourceFormat": {
+          "type": "string",
+          "description": "Gets the original format of the video."
+        },
+        "VideoProperties": {
+          "description": "Returns Video file properties.",
+          "$ref": "#/definitions/VideoProperties"
+        }
+      },
+      "description": "Represents Video file DTO."
+    },
+    "ConvertOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Codec",
+        "Preset",
+        "standard",
+        "aspectRatio",
+        "bitrate",
+        "FPS",
+        "PTS",
+        "volume"
+      ],
+      "properties": {
+        "Codec": {
+          "enum": [
+            "Default",
+            "AVC",
+            "H_265",
+            "H_264",
+            "MPEG4",
+            "WMV7",
+            "WMV8",
+            "VP8",
+            "VP9",
+            "XVID"
+          ],
+          "description": "Gets or sets a value determining which  should be used for the resulting video.\nDefault value is ."
+        },
+        "Preset": {
+          "enum": [
+            "Ultrafast",
+            "Superfast",
+            "Veryfast",
+            "Faster",
+            "Fast",
+            "Medium",
+            "Slow",
+            "Slower",
+            "Veryslow",
+            "Placebo"
+          ],
+          "description": "Gets or sets a value determining which  level should be used for the encoding process.\nDefault value is ."
+        },
+        "standard": {
+          "enum": [
+            "Default",
+            "PAL",
+            "NTSC",
+            "FILM"
+          ],
+          "description": "Set the video standard:  PAL, NTSC, FILM"
+        },
+        "frameSize": {
+          "type": "string",
+          "description": "Set result video resolution"
+        },
+        "aspectRatio": {
+          "enum": [
+            "Default",
+            "R3_2",
+            "R4_3",
+            "R5_3",
+            "R5_4",
+            "R8_5",
+            "R16_9",
+            "R17_9"
+          ],
+          "description": "Set result video aspect ratio"
+        },
+        "bitrate": {
+          "type": "integer",
+          "description": "Set result video bitrate",
+          "format": "int32"
+        },
+        "FPS": {
+          "type": "integer",
+          "description": "Set result video FPS",
+          "format": "int32"
+        },
+        "watermark": {
+          "description": "Set watermark image",
+          "$ref": "#/definitions/WatermarkImageOptions"
+        },
+        "watermarkText": {
+          "description": "Set watermark text",
+          "$ref": "#/definitions/WatermarkTextOptions"
+        },
+        "PTS": {
+          "enum": [
+            "Default",
+            "slowDown",
+            "speedUp"
+          ],
+          "description": "Set result video PTS"
+        },
+        "volume": {
+          "type": "integer",
+          "description": "Represents the volume level in percentage. Default level is 100",
+          "format": "int32"
+        }
+      },
+      "description": "container class for convert save options"
+    },
+    "WatermarkImageOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "startPos",
+        "length",
+        "X",
+        "Y"
+      ],
+      "properties": {
+        "watermarkPath": {
+          "type": "string",
+          "description": "Path to the image "
+        },
+        "startPos": {
+          "type": "integer",
+          "description": "Time position from which the watermark will be addded in milliseconds",
+          "format": "int64"
+        },
+        "length": {
+          "type": "integer",
+          "description": "Time position up to which the watermark will be addded in milliseconds",
+          "format": "int64"
+        },
+        "X": {
+          "type": "number",
+          "description": "X position coordinates",
+          "format": "double"
+        },
+        "Y": {
+          "type": "number",
+          "description": "Y position coordinates",
+          "format": "double"
+        }
+      },
+      "description": "container class for watermark image save options"
+    },
+    "WatermarkTextOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "startPos",
+        "length",
+        "X",
+        "Y",
+        "size",
+        "color"
+      ],
+      "properties": {
+        "Text": {
+          "type": "string",
+          "description": "Watermark text"
+        },
+        "startPos": {
+          "type": "integer",
+          "description": "Time position from which the watermark should be added in milliseconds",
+          "format": "int64"
+        },
+        "length": {
+          "type": "integer",
+          "description": "Time position up to which the watermark should be added in milliseconds",
+          "format": "int64"
+        },
+        "X": {
+          "type": "number",
+          "description": "X position",
+          "format": "double"
+        },
+        "Y": {
+          "type": "number",
+          "description": "Y position",
+          "format": "double"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Text size",
+          "format": "int32"
+        },
+        "fontFile": {
+          "type": "string",
+          "description": "Path to the font file"
+        },
+        "color": {
+          "description": "Color of the text",
+          "$ref": "#/definitions/Color"
+        }
+      },
+      "description": "container class for watermark text save options"
+    },
+    "Color": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "Transparent",
+        "AliceBlue",
+        "AntiqueWhite",
+        "Aqua",
+        "Aquamarine",
+        "Azure",
+        "Beige",
+        "Bisque",
+        "Black",
+        "BlanchedAlmond",
+        "Blue",
+        "BlueViolet",
+        "Brown",
+        "BurlyWood",
+        "CadetBlue",
+        "Chartreuse",
+        "Chocolate",
+        "Coral",
+        "CornflowerBlue",
+        "Cornsilk",
+        "Crimson",
+        "Cyan",
+        "DarkBlue",
+        "DarkCyan",
+        "DarkGoldenrod",
+        "DarkGray",
+        "DarkGreen",
+        "DarkKhaki",
+        "DarkMagenta",
+        "DarkOliveGreen",
+        "DarkOrange",
+        "DarkOrchid",
+        "DarkRed",
+        "DarkSalmon",
+        "DarkSeaGreen",
+        "DarkSlateBlue",
+        "DarkSlateGray",
+        "DarkTurquoise",
+        "DarkViolet",
+        "DeepPink",
+        "DeepSkyBlue",
+        "DimGray",
+        "DodgerBlue",
+        "Firebrick",
+        "FloralWhite",
+        "ForestGreen",
+        "Fuchsia",
+        "Gainsboro",
+        "GhostWhite",
+        "Gold",
+        "Goldenrod",
+        "Gray",
+        "Green",
+        "GreenYellow",
+        "Honeydew",
+        "HotPink",
+        "IndianRed",
+        "Indigo",
+        "Ivory",
+        "Khaki",
+        "Lavender",
+        "LavenderBlush",
+        "LawnGreen",
+        "LemonChiffon",
+        "LightBlue",
+        "LightCoral",
+        "LightCyan",
+        "LightGoldenrodYellow",
+        "LightGreen",
+        "LightGray",
+        "LightPink",
+        "LightSalmon",
+        "LightSeaGreen",
+        "LightSkyBlue",
+        "LightSlateGray",
+        "LightSteelBlue",
+        "LightYellow",
+        "Lime",
+        "LimeGreen",
+        "Linen",
+        "Magenta",
+        "Maroon",
+        "MediumAquamarine",
+        "MediumBlue",
+        "MediumOrchid",
+        "MediumPurple",
+        "MediumSeaGreen",
+        "MediumSlateBlue",
+        "MediumSpringGreen",
+        "MediumTurquoise",
+        "MediumVioletRed",
+        "MidnightBlue",
+        "MintCream",
+        "MistyRose",
+        "Moccasin",
+        "NavajoWhite",
+        "Navy",
+        "OldLace",
+        "Olive",
+        "OliveDrab",
+        "Orange",
+        "OrangeRed",
+        "Orchid",
+        "PaleGoldenrod",
+        "PaleGreen",
+        "PaleTurquoise",
+        "PaleVioletRed",
+        "PapayaWhip",
+        "PeachPuff",
+        "Peru",
+        "Pink",
+        "Plum",
+        "PowderBlue",
+        "Purple",
+        "Red",
+        "RosyBrown",
+        "RoyalBlue",
+        "SaddleBrown",
+        "Salmon",
+        "SandyBrown",
+        "SeaGreen",
+        "SeaShell",
+        "Sienna",
+        "Silver",
+        "SkyBlue",
+        "SlateBlue",
+        "SlateGray",
+        "Snow",
+        "SpringGreen",
+        "SteelBlue",
+        "Tan",
+        "Teal",
+        "Thistle",
+        "Tomato",
+        "Turquoise",
+        "Violet",
+        "Wheat",
+        "White",
+        "WhiteSmoke",
+        "Yellow",
+        "YellowGreen",
+        "R",
+        "G",
+        "B",
+        "A",
+        "IsKnownColor",
+        "IsEmpty",
+        "IsNamedColor",
+        "IsSystemColor",
+        "Empty"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Transparent": {
+              "$ref": "#/definitions/Color"
+            },
+            "AliceBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "AntiqueWhite": {
+              "$ref": "#/definitions/Color"
+            },
+            "Aqua": {
+              "$ref": "#/definitions/Color"
+            },
+            "Aquamarine": {
+              "$ref": "#/definitions/Color"
+            },
+            "Azure": {
+              "$ref": "#/definitions/Color"
+            },
+            "Beige": {
+              "$ref": "#/definitions/Color"
+            },
+            "Bisque": {
+              "$ref": "#/definitions/Color"
+            },
+            "Black": {
+              "$ref": "#/definitions/Color"
+            },
+            "BlanchedAlmond": {
+              "$ref": "#/definitions/Color"
+            },
+            "Blue": {
+              "$ref": "#/definitions/Color"
+            },
+            "BlueViolet": {
+              "$ref": "#/definitions/Color"
+            },
+            "Brown": {
+              "$ref": "#/definitions/Color"
+            },
+            "BurlyWood": {
+              "$ref": "#/definitions/Color"
+            },
+            "CadetBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "Chartreuse": {
+              "$ref": "#/definitions/Color"
+            },
+            "Chocolate": {
+              "$ref": "#/definitions/Color"
+            },
+            "Coral": {
+              "$ref": "#/definitions/Color"
+            },
+            "CornflowerBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "Cornsilk": {
+              "$ref": "#/definitions/Color"
+            },
+            "Crimson": {
+              "$ref": "#/definitions/Color"
+            },
+            "Cyan": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkCyan": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkGoldenrod": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkKhaki": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkMagenta": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkOliveGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkOrange": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkOrchid": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkRed": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkSalmon": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkSeaGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkSlateBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkSlateGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkTurquoise": {
+              "$ref": "#/definitions/Color"
+            },
+            "DarkViolet": {
+              "$ref": "#/definitions/Color"
+            },
+            "DeepPink": {
+              "$ref": "#/definitions/Color"
+            },
+            "DeepSkyBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "DimGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "DodgerBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "Firebrick": {
+              "$ref": "#/definitions/Color"
+            },
+            "FloralWhite": {
+              "$ref": "#/definitions/Color"
+            },
+            "ForestGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "Fuchsia": {
+              "$ref": "#/definitions/Color"
+            },
+            "Gainsboro": {
+              "$ref": "#/definitions/Color"
+            },
+            "GhostWhite": {
+              "$ref": "#/definitions/Color"
+            },
+            "Gold": {
+              "$ref": "#/definitions/Color"
+            },
+            "Goldenrod": {
+              "$ref": "#/definitions/Color"
+            },
+            "Gray": {
+              "$ref": "#/definitions/Color"
+            },
+            "Green": {
+              "$ref": "#/definitions/Color"
+            },
+            "GreenYellow": {
+              "$ref": "#/definitions/Color"
+            },
+            "Honeydew": {
+              "$ref": "#/definitions/Color"
+            },
+            "HotPink": {
+              "$ref": "#/definitions/Color"
+            },
+            "IndianRed": {
+              "$ref": "#/definitions/Color"
+            },
+            "Indigo": {
+              "$ref": "#/definitions/Color"
+            },
+            "Ivory": {
+              "$ref": "#/definitions/Color"
+            },
+            "Khaki": {
+              "$ref": "#/definitions/Color"
+            },
+            "Lavender": {
+              "$ref": "#/definitions/Color"
+            },
+            "LavenderBlush": {
+              "$ref": "#/definitions/Color"
+            },
+            "LawnGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "LemonChiffon": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightCoral": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightCyan": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightGoldenrodYellow": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightPink": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightSalmon": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightSeaGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightSkyBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightSlateGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightSteelBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "LightYellow": {
+              "$ref": "#/definitions/Color"
+            },
+            "Lime": {
+              "$ref": "#/definitions/Color"
+            },
+            "LimeGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "Linen": {
+              "$ref": "#/definitions/Color"
+            },
+            "Magenta": {
+              "$ref": "#/definitions/Color"
+            },
+            "Maroon": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumAquamarine": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumOrchid": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumPurple": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumSeaGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumSlateBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumSpringGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumTurquoise": {
+              "$ref": "#/definitions/Color"
+            },
+            "MediumVioletRed": {
+              "$ref": "#/definitions/Color"
+            },
+            "MidnightBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "MintCream": {
+              "$ref": "#/definitions/Color"
+            },
+            "MistyRose": {
+              "$ref": "#/definitions/Color"
+            },
+            "Moccasin": {
+              "$ref": "#/definitions/Color"
+            },
+            "NavajoWhite": {
+              "$ref": "#/definitions/Color"
+            },
+            "Navy": {
+              "$ref": "#/definitions/Color"
+            },
+            "OldLace": {
+              "$ref": "#/definitions/Color"
+            },
+            "Olive": {
+              "$ref": "#/definitions/Color"
+            },
+            "OliveDrab": {
+              "$ref": "#/definitions/Color"
+            },
+            "Orange": {
+              "$ref": "#/definitions/Color"
+            },
+            "OrangeRed": {
+              "$ref": "#/definitions/Color"
+            },
+            "Orchid": {
+              "$ref": "#/definitions/Color"
+            },
+            "PaleGoldenrod": {
+              "$ref": "#/definitions/Color"
+            },
+            "PaleGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "PaleTurquoise": {
+              "$ref": "#/definitions/Color"
+            },
+            "PaleVioletRed": {
+              "$ref": "#/definitions/Color"
+            },
+            "PapayaWhip": {
+              "$ref": "#/definitions/Color"
+            },
+            "PeachPuff": {
+              "$ref": "#/definitions/Color"
+            },
+            "Peru": {
+              "$ref": "#/definitions/Color"
+            },
+            "Pink": {
+              "$ref": "#/definitions/Color"
+            },
+            "Plum": {
+              "$ref": "#/definitions/Color"
+            },
+            "PowderBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "Purple": {
+              "$ref": "#/definitions/Color"
+            },
+            "Red": {
+              "$ref": "#/definitions/Color"
+            },
+            "RosyBrown": {
+              "$ref": "#/definitions/Color"
+            },
+            "RoyalBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "SaddleBrown": {
+              "$ref": "#/definitions/Color"
+            },
+            "Salmon": {
+              "$ref": "#/definitions/Color"
+            },
+            "SandyBrown": {
+              "$ref": "#/definitions/Color"
+            },
+            "SeaGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "SeaShell": {
+              "$ref": "#/definitions/Color"
+            },
+            "Sienna": {
+              "$ref": "#/definitions/Color"
+            },
+            "Silver": {
+              "$ref": "#/definitions/Color"
+            },
+            "SkyBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "SlateBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "SlateGray": {
+              "$ref": "#/definitions/Color"
+            },
+            "Snow": {
+              "$ref": "#/definitions/Color"
+            },
+            "SpringGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "SteelBlue": {
+              "$ref": "#/definitions/Color"
+            },
+            "Tan": {
+              "$ref": "#/definitions/Color"
+            },
+            "Teal": {
+              "$ref": "#/definitions/Color"
+            },
+            "Thistle": {
+              "$ref": "#/definitions/Color"
+            },
+            "Tomato": {
+              "$ref": "#/definitions/Color"
+            },
+            "Turquoise": {
+              "$ref": "#/definitions/Color"
+            },
+            "Violet": {
+              "$ref": "#/definitions/Color"
+            },
+            "Wheat": {
+              "$ref": "#/definitions/Color"
+            },
+            "White": {
+              "$ref": "#/definitions/Color"
+            },
+            "WhiteSmoke": {
+              "$ref": "#/definitions/Color"
+            },
+            "Yellow": {
+              "$ref": "#/definitions/Color"
+            },
+            "YellowGreen": {
+              "$ref": "#/definitions/Color"
+            },
+            "R": {
+              "type": "integer",
+              "format": "byte"
+            },
+            "G": {
+              "type": "integer",
+              "format": "byte"
+            },
+            "B": {
+              "type": "integer",
+              "format": "byte"
+            },
+            "A": {
+              "type": "integer",
+              "format": "byte"
+            },
+            "IsKnownColor": {
+              "type": "boolean"
+            },
+            "IsEmpty": {
+              "type": "boolean"
+            },
+            "IsNamedColor": {
+              "type": "boolean"
+            },
+            "IsSystemColor": {
+              "type": "boolean"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Empty": {
+              "$ref": "#/definitions/Color"
+            }
+          }
+        }
+      ]
+    },
+    "ValueType": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false
+    },
+    "SaveResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "SaveResult": {
+              "description": "Save result.",
+              "$ref": "#/definitions/SaveResult"
+            }
+          }
+        }
+      ],
+      "description": "Save response."
+    },
+    "SaveResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SourceVideo": {
+          "description": "Link to source video.",
+          "$ref": "#/definitions/FileLink"
+        },
+        "DestVideo": {
+          "description": "Link to destination video.",
+          "$ref": "#/definitions/FileLink"
+        },
+        "AdditionalItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileLink"
+          },
+          "description": "Links to additional items (css, images etc)."
+        }
+      },
+      "description": "Result of saving."
+    },
+    "FileLink": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/Link"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Provides information for the file link."
+    },
+    "ExtractThumbnailResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ExtractResult": {
+              "$ref": "#/definitions/ExtractThumbnailResult"
+            }
+          }
+        }
+      ]
+    },
+    "ExtractThumbnailResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SourceVideo": {
+          "$ref": "#/definitions/FileLink"
+        }
+      }
+    },
+    "ExtractVideoResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ExtractResult": {
+              "$ref": "#/definitions/ExtractVideoResult"
+            }
+          }
+        }
+      ]
+    },
+    "ExtractVideoResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SourceVideo": {
+          "$ref": "#/definitions/FileLink"
+        }
+      }
+    },
+    "LoadWebVideoData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LoadingVideoUrl": {
+          "type": "string",
+          "description": "Web video url"
+        },
+        "SaveOptions": {
+          "description": "Save options",
+          "$ref": "#/definitions/SaveOptionsData"
+        }
+      },
+      "description": "Contains data for load web video"
+    },
+    "SaveOptionsData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SaveFormat": {
+          "type": "string",
+          "description": "format of save"
+        },
+        "FileName": {
+          "type": "string",
+          "description": "name of destination file"
+        },
+        "ZipOutput": {
+          "type": "boolean",
+          "description": "Controls zip output or not.\nDefault value is false."
+        }
+      },
+      "description": "base container class for save options data"
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth": {
+      "type": "oauth2",
+      "flow": "application",
+      "authorizationUrl": "localhost/oauth2/token"
+    },
+    "appsid": {
+      "type": "apiKey",
+      "name": "Appsid",
+      "in": "query"
+    },
+    "signature": {
+      "type": "apiKey",
+      "name": "Signature",
+      "in": "query"
+    }
+  }
+}
