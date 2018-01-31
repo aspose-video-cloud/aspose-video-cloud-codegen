@@ -106,6 +106,205 @@
         "x-csharp-implements": "IVideoFileRequest"
       }
     },
+    "/video/{name}/addAudio": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Add audio to original video.",
+        "operationId": "PostAddAudio",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Path where to save the result file."
+          },
+          {
+            "name": "Audio",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioContainer"
+            },
+            "x-nullable": true,
+            "description": "Audio options.\n            "
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with updated video data.\n           ",
+            "schema": {
+              "$ref": "#/definitions/VideoResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest"
+      }
+    },
+    "/video/{name}/removeAudio": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Remove audio from the original video.",
+        "operationId": "PostRemoveAudio",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Path where to save the result file."
+          },
+          {
+            "name": "TracksId",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "x-nullable": true,
+            "description": "Ids of the audio tracks to be removed.\n            "
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with updated video data.\n           ",
+            "schema": {
+              "$ref": "#/definitions/VideoResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest"
+      }
+    },
+    "/video/{name}/extractAudio": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "summary": "Extract audio from the original video.",
+        "operationId": "PostExtractAudio",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Original video name."
+          },
+          {
+            "type": "string",
+            "name": "DestinationPath",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "Path where to save the result file."
+          },
+          {
+            "name": "TrackId",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "description": "Original video folder."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "File storage, which have to be used."
+          },
+          {
+            "type": "string",
+            "name": "DestFileName",
+            "in": "query",
+            "description": "Result name of the document after the operation. If this parameter is omitted then result of the operation will be saved as the source document."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with updated video data.\n           ",
+            "schema": {
+              "$ref": "#/definitions/VideoResponse"
+            },
+            "x-nullable": true
+          }
+        },
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest"
+      }
+    },
     "/video/{name}/appendVideo": {
       "post": {
         "tags": [
@@ -819,6 +1018,86 @@
         }
       ]
     },
+    "AudioContainer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Start",
+        "End",
+        "Offset",
+        "Volume"
+      ],
+      "properties": {
+        "Path": {
+          "type": "string",
+          "description": "Gets or sets a value determining the path of the audio file which will be added as new audio track."
+        },
+        "Start": {
+          "type": "integer",
+          "description": "Gets or sets a value determining the starting time point of the video from which the audio track will be added.\nDefault value is 0",
+          "format": "int64"
+        },
+        "End": {
+          "type": "integer",
+          "description": "Gets or sets a value determining the end time point of the video up to which the audio track will be added.\nDefault value is total video duration",
+          "format": "int64"
+        },
+        "Offset": {
+          "type": "integer",
+          "description": "Gets or sets a value determining the offset for the audio - from which time position of the audio should be used.\nDefault value is 0",
+          "format": "int64"
+        },
+        "Volume": {
+          "type": "integer",
+          "description": "Gets or sets a value determining the volume level for this audio track.\nDefault value is 100",
+          "format": "int32"
+        }
+      },
+      "description": "container class for add audio track options"
+    },
+    "VideoResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AsposeResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Video": {
+              "$ref": "#/definitions/Video"
+            }
+          }
+        }
+      ]
+    },
+    "Video": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "description": "A list of links that originate from this Video file."
+        },
+        "FileName": {
+          "type": "string",
+          "description": "Gets the name of the file."
+        },
+        "SourceFormat": {
+          "type": "string",
+          "description": "Gets the original format of the video."
+        },
+        "VideoProperties": {
+          "description": "Returns Video file properties.",
+          "$ref": "#/definitions/VideoProperties"
+        }
+      },
+      "description": "Represents Video file DTO."
+    },
     "AppendOptions": {
       "type": "object",
       "additionalProperties": false,
@@ -863,49 +1142,6 @@
         }
       },
       "description": "container class for append save options"
-    },
-    "VideoResponse": {
-      "type": "null",
-      "additionalProperties": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/AsposeResponse"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "Video": {
-              "$ref": "#/definitions/Video"
-            }
-          }
-        }
-      ]
-    },
-    "Video": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Links": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "description": "A list of links that originate from this Video file."
-        },
-        "FileName": {
-          "type": "string",
-          "description": "Gets the name of the file."
-        },
-        "SourceFormat": {
-          "type": "string",
-          "description": "Gets the original format of the video."
-        },
-        "VideoProperties": {
-          "description": "Returns Video file properties.",
-          "$ref": "#/definitions/VideoProperties"
-        }
-      },
-      "description": "Represents Video file DTO."
     },
     "ConvertOptions": {
       "type": "object",
