@@ -493,15 +493,12 @@
           "200": {
             "description": "with conversion result.",
             "schema": {
-              "type": "file",
-              "description": "File with result of operation",
               "$ref": "#/definitions/SaveResponse"
             },
             "x-nullable": true
           }
         },
-        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest, ICanSpecifyOutputFormatRequest",
-        "x-binary-result": "true"
+        "x-csharp-implements": "ICanModifyVideoFileRequest, IVideoFileRequest, ICanSpecifyOutputFormatRequest"
       }
     },
     "/video/{name}/extractThumbnail": {
