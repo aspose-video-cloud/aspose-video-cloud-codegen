@@ -1,1 +1,5 @@
 /codegen/SDKs
+/SDKs/NET/sign-keys
+/SDKs/NET/Aspose.Video.Cloud.SDK/*.nuspec
+/SDKs/NET/Aspose.Video.Cloud.SDK/*.Nuget.csproj
+/SDKs/NET/Aspose.Video.Cloud.SDK/*.nupkg 
