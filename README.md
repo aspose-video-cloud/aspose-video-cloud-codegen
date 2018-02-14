@@ -11,7 +11,7 @@ The following SDKs are currently available:
 
 Directory | Description
 --------- | -----------
-[.NET SDK](SDKs/NET) | Aspose.Video for Cloud .NET SDK
+[.NET SDK](https://github.com/aspose-video-cloud/aspose-video-cloud-dotnet) | Aspose.Video for Cloud .NET SDK
 
 # Licensing
 All Aspose.Video for Cloud SDKs are licensed under [MIT License](LICENSE).
