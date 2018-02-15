@@ -1,7 +1,7 @@
 del /S /Q "c:\tmp\csharp"
-java -jar SDKs\codegen\swagger-codegen-cli-2.3.0.jar generate -i SDKs\spec\asposeforcloud_video_csharp.json -l csharp -t SDKs\codegen\Templates\csharp -o c:/tmp/csharp/ -c SDKs\codegen\config.json 
+java -jar codegen\swagger-codegen-cli-2.3.0.jar generate -i spec\asposeforcloud_video_csharp.json -l csharp -t codegen\Templates\csharp -o c:/tmp/csharp/ -c codegen\config.json 
 
-SDKs\codegen\Tools\SplitCSharpCodeFile.exe C:\tmp\csharp\src\Aspose.Video.Cloud.Sdk\Api\VideoApi.cs C:\tmp\csharp\src\Aspose.Video.Cloud.Sdk\Model\Requests\
+codegen\Tools\SplitCSharpCodeFile.exe C:\tmp\csharp\src\Aspose.Video.Cloud.Sdk\Api\VideoApi.cs C:\tmp\csharp\src\Aspose.Video.Cloud.Sdk\Model\Requests\
 
 del /S /Q "SDKs\NET\Aspose.Video.Cloud.Sdk\Model"
 del /S /Q "SDKs\NET\Aspose.Video.Cloud.Sdk\Api\VideoApi.cs"
